@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UserList from '../UserList';
 import PostList from '../PostList';
 import CreatePost from '../Post/CreatePost/CreatePost';
+import Header from '../Header/Header';
 // import CreatePost from './components/Post/CreatePost/CreatePost';
 
 const Dashboard = () => {
@@ -18,11 +19,13 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h1>Welcome to the Dashboard {user.username}</h1>
+            <Header/>
+            {/* <h1>Welcome to the Dashboard {user.username}</h1> */}
 
-            <PostList />
-            <UserList />
+
             <CreatePost />
+            <PostList />
+            {/* <UserList /> */}
 
         </div>
     );

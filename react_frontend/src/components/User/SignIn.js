@@ -2,66 +2,87 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SignUp from './SignUp';
-import Button from '@mui/material/Button';
+import { TextField, Button, Box, Typography } from '@mui/material';
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate(); // Get the navigate function from useNavigate
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('/auth/signin', {
-                email,
-                password,
-            });
-
-            // for viewing the logs on front end
-            console.log('User signed in:', response.data);
-
-            sessionStorage.setItem('user', JSON.stringify(response.data));
-
-            // Handle successful login, e.g., store user data or redirect
-            navigate('/dashboard');
-
-        } catch (error) {
-            console.error('Error during sign-in:', error);
-        }
-    };
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
     const SignUp = () => {
         navigate('/signup')
     }
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('Form data:', formData);
+        try {
+            const response = await axios.post('/auth/signin', formData);
+            console.log('User signed in:', response.data);
+            sessionStorage.setItem('user', JSON.stringify(response.data));
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Error during sign-in:', error);
+        }
+    };
+
     return (
         <div>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <Button type="submit">Sign In</Button>
-            </form>
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    maxWidth: 400,
+                    margin: 'auto',
+                    padding: 3,
+                    border: '1px solid #ccc',
+                    borderRadius: 2,
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                }}
+            >
+                <Typography variant="h5" component="h2" textAlign="center" gutterBottom>
+                    Sign In
+                </Typography>
+                <TextField
+                    label="Email"
+                    name="email"
+                    type="email"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                />
+                <TextField
+                    label="Password"
+                    name="password"
+                    type="password"
+                    variant="outlined"
+                    fullWidth
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                />
+                <Button variant="contained" color="primary" type="submit" fullWidth>
+                    Sign In
+                </Button>
 
-            <h4>Not a user? Sign up!</h4>
-            
-            <Button variant="contained" onClick={SignUp}>Sign Up</Button>
+
+                <Typography variant="h6" component="h4" textAlign="center" gutterBottom>
+                    Not a user? Sign up!
+                </Typography>
+                <Button variant="contained" onClick={SignUp}>Sign Up</Button>
+            </Box>
 
         </div>
     );

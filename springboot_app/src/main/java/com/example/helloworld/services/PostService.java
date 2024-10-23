@@ -4,6 +4,7 @@ import com.example.helloworld.models.Post;
 import com.example.helloworld.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class PostService {
     }
 
     public List<Post> getAllPosts() {
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     public Post createPost(Post post) {

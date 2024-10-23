@@ -24,7 +24,7 @@ const CreatePost = () => {
                 console.error('Error creating post:', error);
             }
         });
-        
+
     };
 
     const [file, setFile] = useState(null);
@@ -58,8 +58,22 @@ const CreatePost = () => {
         <Box
             component="form"
             onSubmit={handleSubmit}
-            sx={{ display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto' }}
+            // sx={{ display: 'flex', flexDirection: 'column', width: '400px', margin: 'auto' }}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+                maxWidth: 400,
+                margin: 'auto',
+                padding: 3,
+                border: '1px solid #ccc',
+                borderRadius: 2,
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            }}
         >
+            <Typography variant="h5" component="h2" textAlign="center" gutterBottom>
+                Post Image
+            </Typography>
             <TextField
                 label="Caption"
                 variant="outlined"
