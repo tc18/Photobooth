@@ -20,12 +20,16 @@ const Header = () => {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const logout = () => {
+        setAnchorEl(null);
         sessionStorage.clear();
         navigate('/')
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Container>
                 <Toolbar>
                     {/* Photobooth Title (Centered) */}
@@ -64,7 +68,7 @@ const Header = () => {
                             onClose={handleClose}
                         >
                             <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                            <MenuItem onClick={logout}>Logout</MenuItem>
                         </Menu>
                     </div>
                 </Toolbar>

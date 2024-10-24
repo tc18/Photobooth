@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import ProtectedRoute from "./Routes/ProtectedRoute";
 
 const App = () => {
-  const isAuthenticated = !!sessionStorage.getItem('user');
+  const isAuthenticated = true // !!sessionStorage.getItem('user');
   console.log(isAuthenticated);
 
   return (

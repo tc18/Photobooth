@@ -27,6 +27,10 @@ const CreatePost = () => {
 
     };
 
+    const change_name = (e) => {
+        setCaption(e)
+    }
+
     const [file, setFile] = useState(null);
 
     const handleFileChange = (event) => {
@@ -89,6 +93,17 @@ const CreatePost = () => {
                 required
                 style={{ marginBottom: '16px' }} // Add some spacing
             />
+            {/* <Button
+                accept="image/*"
+                variant="contained"
+                color="secondary"
+                onChange={handleFileChange}
+                required
+                disabled={!file}  // Disable the button if no valid file
+                sx={{ mt: 2 }}
+            >
+                Upload File
+            </Button> */}
             {imageUrl && (
                 <Box sx={{ marginBottom: 2 }}>
                     <Typography variant="body2">Preview:</Typography>
