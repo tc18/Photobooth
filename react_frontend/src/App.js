@@ -12,6 +12,7 @@ import ProtectedRoute from "./Routes/ProtectedRoute";
 
 const App = () => {
   const isAuthenticated = !!sessionStorage.getItem('user');
+  console.log(isAuthenticated);
 
   return (
 

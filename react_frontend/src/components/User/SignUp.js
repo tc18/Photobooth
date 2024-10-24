@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography } from '@mui/material';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -20,6 +22,7 @@ const SignUp = () => {
         try {
             const response = await axios.post('/users', formData);
             console.log('User registered:', response.data);
+            navigate('/dashboard');
         } catch (error) {
             console.error('Error during sign-up:', error);
         }
