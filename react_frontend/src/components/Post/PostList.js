@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Grid, Box, Card, CardMedia, CardContent, Typography, ImageList, ImageListItem } from '@mui/material';
-import Post from "./Post/Post"
+import Post from "./Post"
 
 const PostList = () => {
     const [posts, setPosts] = useState([]);

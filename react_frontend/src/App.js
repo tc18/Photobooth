@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import UserList from './components/UserList';
-import PostList from './components/PostList';
+import UserList from './components/User/UserList';
+import PostList from './components/Post/PostList';
 import CreatePost from './components/Post/CreatePost/CreatePost';
 import SignUp from './components/User/SignUp';
 import SignIn from './components/User/SignIn';

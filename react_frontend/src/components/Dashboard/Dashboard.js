@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserList from '../UserList';
-import PostList from '../PostList';
+import UserList from '../User/UserList';
+import PostList from '../Post/PostList';
 import CreatePost from '../Post/CreatePost/CreatePost';
 import Header from '../Header/Header';
 // import CreatePost from './components/Post/CreatePost/CreatePost';
@@ -14,7 +14,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (!user) {
-            // Redirect to sign-in page if the user is not logged in
             navigate('/');
         }
     }, [user, navigate]);
@@ -22,9 +21,7 @@ const Dashboard = () => {
     return (
         <div>
             <Header/>
-            {/* <h1>Welcome to the Dashboard {user.username}</h1> */}
-            <input type="text" value={temp}></input>
-
+            <div style={{height:70}}></div>
             <CreatePost />
             <PostList />
             {/* <UserList /> */}
