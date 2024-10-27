@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/images")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ImageController {
 
     @Autowired

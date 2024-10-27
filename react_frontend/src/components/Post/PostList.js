@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Grid, Box, Card, CardMedia, CardContent, Typography, ImageList, ImageListItem } from '@mui/material';
 import Post from "./Post"
+import { API_URL } from './../../config/config'; // Adjust the path if necessary
 
 const PostList = () => {
     const [posts, setPosts] = useState([]);
@@ -9,7 +10,7 @@ const PostList = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('/posts');
+                const response = await axios.get(`${API_URL}/posts`);
                 setPosts(response.data);
                 console.log(response.data)
             } catch (error) {

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SignUp from './SignUp';
 import { TextField, Button, Box, Typography } from '@mui/material';
+import { API_URL } from './../../config/config'; // Adjust the path if necessary
 
 const SignIn = () => {
     const navigate = useNavigate(); // Get the navigate function from useNavigate
@@ -24,7 +25,7 @@ const SignIn = () => {
         e.preventDefault();
         console.log('Form data:', formData);
         try {
-            const response = await axios.post('/auth/signin', formData);
+            const response = await axios.post(`${API_URL}/auth/signin`, formData);
             console.log('User signed in:', response.data);
             sessionStorage.setItem('user', JSON.stringify(response.data));
             navigate('/dashboard');

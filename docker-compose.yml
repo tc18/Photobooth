@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: instagram
+    ports:
+      - "3307:3306"
+    networks:
+      - mynetwork
+
+  springboot:
+    build:
+      context: ./springboot_app
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/Instagram
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+
+  react:
+    depends_on:
+      - springboot
+    build: 
+      context: ./react_frontend
+      args:
+        - SPRING_APPLICATION_IP=springboot
+        - SPRING_APPLICATION_PORT=$SPRING_DOCKER_PORT
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    environment:
+      - "SPRING_APPLICATION_IP=springboot"
+      - "SPRING_APPLICATION_PORT=$SPRING_APPLICATION_PORT"
+    volumes:
+      - .m3:/root/.m3
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+  springboot: {}
+  mysqldb: {}

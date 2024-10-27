@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Grid, Box, Card, CardMedia, CardContent, Typography, Button, TextField } from '@mui/material';
+import { API_URL } from './../../../config/config'; // Adjust the path if necessary
 
 const CreatePost = () => {
     const [caption, setCaption] = useState('');
@@ -11,7 +12,7 @@ const CreatePost = () => {
         await handleUpload().then(async (imageUrl) => {
             const user = JSON.parse(sessionStorage.getItem('user'));
             try {
-                const response = await axios.post('/posts', {
+                const response = await axios.post(`${API_URL}/posts`, {
                     user,
                     caption,
                     imageUrl
@@ -42,7 +43,7 @@ const CreatePost = () => {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('/api/images/upload', formData, {
+            const response = await axios.post(`${API_URL}/api/images/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
